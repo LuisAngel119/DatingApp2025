@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { LoginCreds, RegisterCreds, User } from '../../types/user';
 import { Observable, tap } from 'rxjs';
@@ -9,7 +10,6 @@ import { environment } from '../../environments/environment';
 export class AccountService {
   private http = inject(HttpClient);
   currentUser = signal<User | null>(null);
-
   baseUrl = environment.apiUrl;
 
   register(creds: RegisterCreds): Observable<User> {
