@@ -1,16 +1,26 @@
-import { TestBed } from '@angular/core/testing';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable, signal } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { Member, Photo } from '../../types/member';
+import { Observable } from 'rxjs';
 
-import { MembersService } from './members-service';
+@Injectable({
+  providedIn: 'root'
+})
+export class MembersService {
+  private http = inject(HttpClient);
+  private baseUrl = environment.apiUrl;
+  editMode = signal(false);
 
-describe('MembersService', () => {
-  let service: MembersService;
+  getMember(id: string): Observable<Member> {
+    return this.http.get<Member>(this.baseUrl + "members/" + id);
+  }
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(MembersService);
-  });
+  getMembers(): Observable<Member[]> {
+    return this.http.get<Member[]>(this.baseUrl + "members");
+  }
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+  getPhotos(id: string) {
+    return this.http.get<Photo[]>(`${this.baseUrl}members/${id}/photos`);
+  }
+}
