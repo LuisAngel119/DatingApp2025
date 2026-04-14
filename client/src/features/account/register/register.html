@@ -12,16 +12,13 @@
       </label>
       <label class="floating-label">
         <span>Password</span>
-        <input class="input w-full" formControlName="password" placeholder="Password">
-      </label>
+        <input class="input w-full" formControlName="password" placeholder="Password" type="password"></label>
       <label class="floating-label">
         <span>Confirm Password</span>
-        <input class="input w-full" formControlName="confirmPassword" placeholder="Confirm Password">
-      </label>
+        <input class="input w-full" formControlName="confirmPassword" placeholder="Confirm Password" type="password"></label>
       <div class="flex items-center justify-end gap-3">
-        <button (click)="cancel()" type="button" class="btn">Cancel</button>
-        <button class="btn btn-primary" type="submit">Register</button>
-      </div>
+        <button class="btn" (click)="cancel()" type="button">Cancel</button>
+        <button class="btn btn-primary" [disabled]="!registerForm.valid" type="submit">Register</button></div>
     </form>
   </div>
   <div class="flex flex-col items-start px-3 w-full  mockup-code text-lg">
